@@ -1,0 +1,29 @@
+{
+  "entrypoints": {
+    "vendor/bootstrap/js/bootstrap": {
+      "js": [
+        "/assets/vendor/bootstrap/js/bootstrap.js"
+      ]
+    },
+    "vendor/jquery/jquery": {
+      "js": [
+        "/assets/vendor/jquery/jquery.js"
+      ]
+    },
+    "js/main": {
+      "js": [
+        "/assets/js/main.js"
+      ]
+    },
+    "css/dashboard": {
+      "css": [
+        "/assets/css/dashboard.css"
+      ]
+    },
+    "vendor/bootstrap/css/bootstrap": {
+      "css": [
+        "/assets/vendor/bootstrap/css/bootstrap.css"
+      ]
+    }
+  }
+}

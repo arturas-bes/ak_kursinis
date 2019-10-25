@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <h1 class="m-4">Pridėti straipsnį</h1>
+    </div>
+
+    {{ form_start(form) }}
+    <label for="blog_post_title">Pavadinimas</label>
+    {{ form_widget(form.title,{'attr': {'class': 'form-control', 'placeholder': 'Pavadinimas'}, 'id': 'validationServer01' }) }}
+    <br>
+    <label for="blog_post_subject">Straipsnis</label>
+    {{ form_widget(form.subject,{'attr': {'class': 'form-control', 'placeholder': 'Straipsnis'}, 'id': 'validationServer01' }) }}
+    <br>
+    <label class="blog_post_uploaded_image" for="blog_post_uploaded_image">Nuotrauka</label>
+    {{ form_widget(form.uploaded_image,{'attr': {'class': 'custom-file-input', 'placeholder' : 'Pasirinkite failą'}}) }}
+
+
+{#    <label for="inlineFormCustomSelect">Kategorija</label>#}
+{#    <select name="category[parent]" class="custom-select mr-sm-2" id="inlineFormCustomSelect">#}
+{#        {{ render(controller('App\\Controller\\Admin\\SuperAdmin\\CategoriesController::getAllCategories')) }}#}
+{#    </select>#}
+{#    <div class="invalid-feedback">#}
+{#        {{ form_errors(form.name) }}#}
+{#    </div>#}
+    <button class="btn btn-primary mt-3" type="submit">Pridėti</button>
+    {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+        $('.custom-file-input').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
+{% endblock %}
