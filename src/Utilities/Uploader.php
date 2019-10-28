@@ -23,10 +23,11 @@ class Uploader
         $video_number = random_int(1, 10000000);
         $fileName = $video_number . '.' . $file->guessExtension();
         try {
+
             $file->move($this->getTargetDirectory(), $fileName);
 
         } catch (FileException $e) {
-            exit('cannot upload file');
+            exit('cannot upload file'.$e);
         }
         $original_file_name = $this->clear(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         return [$fileName, $original_file_name];
@@ -45,6 +46,7 @@ class Uploader
 
     private function getTargetDirectory()
     {
+
         return $this->targetDirectory;
     }
 

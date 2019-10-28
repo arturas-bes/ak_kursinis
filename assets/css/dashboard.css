@@ -47,3 +47,6 @@ body {
         margin-left: -15rem;
     }
 }
+.blog-post:last-child {
+    padding-bottom: 20px;
+}

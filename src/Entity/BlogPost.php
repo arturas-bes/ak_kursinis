@@ -65,6 +65,12 @@ class BlogPost
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="blogPosts")
+     */
+    private $author;
+
+
     public function __construct()
     {
         $this->updatedTimestamps();
@@ -181,5 +187,18 @@ class BlogPost
 
         return $this;
     }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
 
 }

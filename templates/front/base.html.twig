@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Ak kursinis darbas blogas">
+    <meta name="author" content="Arturas Bespalovas">
+
+    <title>AK kursinis darbas - Blogas</title>
+
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+
+</head>
+{% block body %}
+<!-- Navigation -->
+<div style="margin-top: 100px" class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('home') }}">AK kursinis darbas - Blogas</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('home') }}">Pagrindinis
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Apie autorių</a>
+                    </li>
+                </ul>
+            </div>
+            <form class=" ml-4 form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">Paieška</button>
+            </form>
+            <div class="dropdown show ml-4">
+                {% if app.user %}
+                    <a class="btn btn-secondary dropdown-toggle" href="{{ path('admin') }}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profilis</a>
+                {% else %}
+                    <a class="btn btn-secondary dropdown-toggle" href="{{ path('login') }}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prisijungti</a>
+                {% endif %}
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% if app.user %}
+                        <a class="dropdown-item" href="{{ path('admin') }}">Valdymo skydas</a>
+                        <a class="dropdown-item" href="{{ path('logout') }}">Atsijungti</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{{ path('login') }}">Prisijungti</a>
+                        <a class="dropdown-item" href="{{ path('register') }}">Registruotis</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+{% block main %}{% endblock %}
+
+    </div>
+</div>
+{% endblock %}
+<!-- Footer -->
+{% block footer %}
+<footer style="position: fixed; bottom: 0; width: 100%" class="py-2 bg-dark">
+        <p class="m-0 text-center text-white">Alytaus kolegija &copy; Artūras Bespalovas 2019</p>
+
+</footer>
+{% endblock %}
+<!-- Menu Toggle Script -->
+{% block javascripts %}
+    <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
+    <script>
+        window.$ = window.jQuery = $;
+
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+{% endblock %}
+</html>

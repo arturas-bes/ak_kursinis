@@ -3,7 +3,7 @@
 {% block main %}
     <div class="row">
 
-        <h1 class="m-4">Pridėti kategorija</h1>
+        <h1 class="m-4">Pridėti kategoriją</h1>
     </div>
 
     {% include 'admin/includes/category_form.html.twig' %}
@@ -15,8 +15,8 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Pavadinimas</th>
-                <th scope="col">Redaguoti kategorija</th>
-                <th scope="col">Istrinti kategorija</th>
+                <th scope="col">Redaguoti kategoriją</th>
+                <th scope="col">Ištrinti kategoriją</th>
             </tr>
             </thead>
                 {% for category in categories %}
@@ -33,13 +33,13 @@
                             <a href="{{ path("edit_category", {'id': category.id}) }}">Redaguoti</a>
                         </td>
                         <td>
-                            <a href="{{ path("delete_category", {'id': category.id}) }}">Istrinti</a>
+                            <a href="{{ path("delete_category", {'id': category.id}) }}">Ištrinti</a>
                         </td>
                     </tr>
                     </tbody>
                 {% endfor %}
                 {% else %}
-                <h2>Nera jokiu kateogriu.</h2>
+                <h2>Nėra jokių kategorijų.</h2>
             {% endif %}
 
 

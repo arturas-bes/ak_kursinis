@@ -21,8 +21,8 @@
                 <th scope="col">Autorius</th>
                 <th scope="col">Sukurta</th>
                 <th scope="col">Atnaujinta</th>
-                <th scope="col">Redaguoti straipsni</th>
-                <th scope="col">Istrinti straipsni</th>
+                <th scope="col">Redaguoti straipsnį</th>
+                <th scope="col">Ištrinti straipsnį</th>
             </tr>
             </thead>
             <tbody>
@@ -37,16 +37,26 @@
                 <td>{{ post.createdAt|date('Y-m-d') }} </td>
                 <td>{{ post.updatedAt|date('Y-m-d') }} </td>
                 <td><a href="{{ path("edit_blog_post", {'id': post.id}) }}">Redaguoti</a> </td>
-                <td><a href="{{ path("delete_blog_post", {'id': post.id}) }}">Istrinti</a> </td>
+                <td><a href="{{ path("delete_blog_post", {'id': post.id}) }}">Ištrinti</a> </td>
             </tr>
         {% endfor %}
         </tbody>
         </table>
     {% else %}
-        <h2>Nera jokiu straipnsiu.</h2>
+        <h2>Nėra jokių straipsnių.</h2>
     {% endif %}
         </div>
 {% endblock %}
 
 {% block javascripts %}
+
+    {{ parent() }}
+    <script>
+        $('.custom-file-input').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
 {% endblock %}

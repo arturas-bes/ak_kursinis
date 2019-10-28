@@ -42,14 +42,14 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/register/{plan}", name="register")
+     * @Route("/register", name="register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
      * @param SessionInterface $session
      * @param $plan
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, SessionInterface $session, $plan)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, SessionInterface $session)
     {
         $user = new User;
         $form = $this->createForm(UserType::class, $user);
@@ -58,8 +58,8 @@ class FrontController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
 
-            $user->setName($request->request->get('user')['name']);
-            $user->setLastName($request->request->get('user')['last_name']);
+            $user->setFirstName($request->request->get('user')['firstName']);
+            $user->setLastName($request->request->get('user')['lastName']);
             $user->setEmail($request->request->get('user')['email']);
 
             $password = $encoder->encodePassword($user,
@@ -79,21 +79,6 @@ class FrontController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-
-//    /**
-//     * @Route("/login", name="login")
-//     * Parameter stores errors when user provides incorrect data to login form
-//     * @param AuthenticationUtils $helper
-//     * @return Response
-//     */
-//    public function login(AuthenticationUtils $helper)
-//    {
-//        return $this->render('front/login.html.twig', [
-//            'error' => $helper->getLastAuthenticationError()
-//        ]);
-//    }
-
 
     /**
      * @throws \Exception

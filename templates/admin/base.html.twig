@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Ak kursinis darbas blogas">
+    <meta name="author" content="Arturas Bespalovas">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>AK kursinis darbas - Blogas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -23,8 +23,8 @@
         <div class="sidebar-heading">Valdymo skydas</div>
         <div class="list-group list-group-flush">
             <a href="{{ path('admin') }}" class="list-group-item list-group-item-action bg-light">Į pagrindinį</a>
-            <a href="{{ path('add_blog_post') }}" class="list-group-item list-group-item-action bg-light">Straipsniu nustatymai</a>
-            <a href="{{ path('add_category') }}" class="list-group-item list-group-item-action bg-light">Kategoriju nustatymai</a>
+            <a href="{{ path('add_blog_post') }}" class="list-group-item list-group-item-action bg-light">Pridėti straipsnį</a>
+            <a href="{{ path('add_category') }}" class="list-group-item list-group-item-action bg-light">Pridėti kategoriją</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Visi naudotojai</a>
         </div>
     </div>
@@ -43,7 +43,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Į pagrindinį puslapį <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('home') }}">Į pagrindinį blogą <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +54,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Atsijungti</a>
+                        <a class="nav-link" href="{{ path('logout') }}">Atsijungti</a>
                     </li>
 
                 </ul>
@@ -64,7 +64,7 @@
         <div class="container-fluid">
             {% block main %}
             <div class="row">
-                <h1 class="m-4">Visi naudotojo straipsniai</h1>
+                <h1 class="m-4">Visi straipsniai</h1>
             </div>
         {% endblock %}
         </div>
