@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\BlogPost;
+use App\Entity\Category;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\BlogPostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +20,20 @@ class FrontController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param Category $category
+     * @param BlogPost $blogPost
+     * @param User $user
+     * @return Response
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $blogPosts =  $em->getRepository(BlogPost::class)->findAll();
+        $categories =  $em->getRepository(Category::class)->findAll();
+
         return $this->render('front/index.html.twig', [
-            'controller_name' => 'FrontController',
+            'blog_posts' => $blogPosts,
+            'categories' => $categories
         ]);
     }
 
@@ -40,6 +52,8 @@ class FrontController extends AbstractController
             'error'         => $error,
         ));
     }
+
+
 
     /**
      * @Route("/register", name="register")
@@ -99,5 +113,19 @@ class FrontController extends AbstractController
         $this->get('security.token_storage')->setToken($token);
 //        if token exists in the session it means that user is logged in in to the application
         $this->get('session')->set('_security_main', serialize($token));
+    }
+
+    /**
+     * @Route("/{blogPost}", name="single_post")
+     * @param $blogPost
+     * @return Response
+     */
+    public function getSinglePost($blogPost)
+    {   $em = $this->getDoctrine()->getManager();
+        $singlePost =  $em->getRepository(BlogPost::class)->find($blogPost);
+
+        return $this->render('front/single_post.html.twig',[
+            'post' => $singlePost
+        ]);
     }
 }

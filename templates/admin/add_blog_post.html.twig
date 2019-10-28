@@ -33,7 +33,7 @@
                 <td>{{ post.title }}</td>
                 <td>{{post.subject}}</td>
                 <td>{{post.category.name}}</td>
-                <td>John Doe </td>
+                <td>{{ post.author.firstName }} {{ post.author.lastName }}</td>
                 <td>{{ post.createdAt|date('Y-m-d') }} </td>
                 <td>{{ post.updatedAt|date('Y-m-d') }} </td>
                 <td><a href="{{ path("edit_blog_post", {'id': post.id}) }}">Redaguoti</a> </td>

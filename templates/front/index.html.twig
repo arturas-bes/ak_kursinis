@@ -10,33 +10,38 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">1 Kat</a>
-                <a class="nav-item nav-link" href="#">2 Kat</a>
-                <a class="nav-item nav-link" href="#">3 Kat</a>
-                <a class="nav-item nav-link" href="#">4 Kat</a>
-                <a class="nav-item nav-link" href="#">5 Kat</a>
-                <a class="nav-item nav-link" href="#">6 Kat</a>
-                <a class="nav-item nav-link" href="#">7 Kat</a>
+                {% for category in categories %}
+                <a class="nav-item nav-link" href="#">{{ category.name }}</a>
+                {% endfor %}
             </div>
         </div>
     </nav>
-</div>
-            <!-- Blog Entries Column -->
-            <div class="col-md-12 blog-post">
+
+
                 <h1 class="my-4">Mano blogas<small style="color:lightgray; font-size: 18px">/visos kategorijos</small></h1>
-                <!-- Blog Post -->
-                <div class="card mb-4 mb-20">
-                    <h2 class="card-title">Post Title</h2>
-                    <div class="card-footer text-muted">
-                        Posted on January 1, 2017 by
-                        <a href="#">Start Bootstrap</a>
-                    </div>
-                    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    {% for post in blog_posts %}
+         {% if loop.index0 % 2 == 0 %}
+        <div class="row">
+            {% endif %}
+        <div style="height: 650px" class="col-md-6 blog-post">
+                <div style="height: 600px" class="card mb-4 mb-20">
+                    <h2 class="card-title p-2">{{post.title}}</h2>
+
+                    <img style="width: 300px; margin: 0 auto; " class="card-img-top" src="{{ absolute_url(asset(post.imagePath)) }}" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        <a href="#" class="btn btn btn-dark">Daugiau</a>
+                        <p class="card-text">{{ post.subject|length > 140 ? post.subject|slice(0, 240) ~ '...' : post.subject }}</p>
+
+                    </div>
+                    <a  href="{{ path('single_post',{'blogPost': post.id}) }}" class="btn btn-outline-secondary m-3">I straipsnį</a>
+                    <div class="card-footer text-muted">
+                        <small>paskelbta  {{ post.createdAt|date('Y-m-d') }}</small>  autorius  <a href="#">{{ post.author.firstName }} {{ post.author.lastName }}</a>
                     </div>
                 </div>
-                <!-- Pagination -->
+
             </div>
+        {% if loop.index0 % 2 == 1 or loop.last %}
+            </div>
+        {% endif %}
+            {% endfor %}
+</div>
     {% endblock %}
