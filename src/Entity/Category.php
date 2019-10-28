@@ -19,7 +19,7 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -27,6 +27,7 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\BlogPost", mappedBy="category")
      */
     private $blogPosts;
+
 
     public function __construct()
     {

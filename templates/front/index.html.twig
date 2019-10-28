@@ -16,5 +16,11 @@
         <li>Your controller at <code><a href="{{ '/var/www/html/ak-kursinis-symfony-blog/src/Controller/FrontController.php'|file_link(0) }}">src/Controller/FrontController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/var/www/html/ak-kursinis-symfony-blog/templates/front/index.html.twig'|file_link(0) }}">templates/front/index.html.twig</a></code></li>
     </ul>
+
+    {% if app.user %}
+        <a href="{{path('logout')}}">logout</a>
+        {% else %}
+            <a href="{{path('login')}}">login</a>
+    {% endif %}
 </div>
 {% endblock %}
