@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -20,7 +21,7 @@ class BlogPostType extends AbstractType
             ->add('title',TextType::class, [
                 'empty_data' => '' // apeiti duombazes null buga
             ])
-            ->add('subject',TextareaType::class, [
+            ->add('subject',CKEditorType::class, [
                 'empty_data' => ''
             ])
             ->add('uploaded_image', FileType::class, [

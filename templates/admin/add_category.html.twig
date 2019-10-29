@@ -9,14 +9,18 @@
     {% include 'admin/includes/category_form.html.twig' %}
 
     <div class="row">
-        <table class="table">
+
             {% if categories %}
+            <div style="margin: 0 auto" class="col col-md-10">
+                  <table class="table">
             <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Pavadinimas</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th scope="col">Redaguoti kategoriją</th>
                 <th scope="col">Ištrinti kategoriją</th>
+                {% endif %}
             </tr>
             </thead>
                 {% for category in categories %}
@@ -29,21 +33,25 @@
                         <td>
                             {{ category.name }}
                         </td>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <td>
                             <a href="{{ path("edit_category", {'id': category.id}) }}">Redaguoti</a>
                         </td>
                         <td>
                             <a href="{{ path("delete_category", {'id': category.id}) }}">Ištrinti</a>
                         </td>
+                        {% endif %}
                     </tr>
                     </tbody>
                 {% endfor %}
                 {% else %}
                 <h2>Nėra jokių kategorijų.</h2>
+                    </table>
+                    </div>
             {% endif %}
 
 
-        </table>
+
     </div>
 {% endblock %}
 

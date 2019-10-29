@@ -82,6 +82,7 @@ class BlogPostController extends AbstractController
             $blogPost->setTitle($request->request->get('blog_post')['title']);
 
             $blogPost->setSubject($request->request->get('blog_post')['subject']);
+            $blogPost->setAuthor($this->getUser());
             $file = $blogPost->getUploadedImage();
 
             $this->saveImage($blogPost, $file, $uploader);

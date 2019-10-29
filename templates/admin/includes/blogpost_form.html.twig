@@ -1,16 +1,25 @@
 {% block blogpost_form %}
+    <div class="col-md-12 order-md-1">
     {{ form_start(form,{attr: {novalidate: 'novalidate'}}) }}
+    <div class="mb-3">
     <label for="blog_post_title">Pavadinimas</label>
     {{ form_widget(form.title,{'attr': {'class': 'form-control', 'placeholder': 'Pavadinimas'}, 'id': 'validationServer01' }) }}
-    <br>
+    </div>
+    <div class="mb-3">
     <label for="blog_post_subject">Straipsnis</label>
-    {{ form_widget(form.subject,{'attr': {'class': 'form-control', 'placeholder': 'Straipsnis'}, 'id': 'validationServer01' }) }}
-    <br>
+    {{ form_widget(form.subject) }}
+    </div>
+    <div class="mb-3">
     <label for="blog_post_category" for="blog_post_uploaded_image">Kategorija</label>
     {{ form_widget(form.category) }}
-    <br>
+    </div>
+    <div class="mb-3">
     <label for="blog_post_uploaded_image" for="blog_post_uploaded_image">Nuotrauka</label>
     {{ form_widget(form.uploaded_image,{'attr': {'class': 'custom-file-input', 'placeholder' : 'Pasirinkite failą'}}) }}
+    </div>
+    <div class="mb-3">
     <button class="btn btn-primary mt-3 mb-5" type="submit">Pridėti</button>
+    </div>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

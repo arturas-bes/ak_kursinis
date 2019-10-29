@@ -63,9 +63,54 @@
 
         <div class="container-fluid">
             {% block main %}
-            <div class="row">
                 <h1 class="m-4">Visi straipsniai</h1>
-            </div>
+                {% if blog_posts %}
+                <div class="row">
+                    <div style="margin: 0 auto" class="col col-md-10">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Foto</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Pavadinimas</th>
+                            <th scope="col">Turinys</th>
+                            <th scope="col">Priskirta kategorija</th>
+                            <th scope="col">Autorius</th>
+                            <th scope="col">Sukurta</th>
+                            <th scope="col">Atnaujinta</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <th scope="col">Redaguoti straipsnį</th>
+                            <th scope="col">Ištrinti straipsnį</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for post in blog_posts %}
+
+                                <tr>
+                                    <td><img width= "150" src="{{ absolute_url(asset(post.imagePath)) }}" alt="blogpostImg"> </td>
+                                    <td>{{ post.id }}</td>
+                                    <td>{{ post.title|length > 20 ? post.title|slice(0, 20) ~ '...' : post.title }}</td>
+                                    <td>  {{ post.subject|length > 40 ? post.subject|slice(0, 40) ~ '...' : post.subject }} </td>
+                                    <td>{{post.category.name}}</td>
+                                    <td>{{ post.author.firstName }} {{ post.author.lastName }}</td>
+                                    <td>{{ post.createdAt|date('Y-m-d') }} </td>
+                                    <td>{{ post.updatedAt|date('Y-m-d') }} </td>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <td><a href="{{ path("edit_blog_post", {'id': post.id}) }}">Redaguoti</a> </td>
+                                        <td><a href="{{ path("delete_blog_post", {'id': post.id}) }}">Ištrinti</a> </td>
+                                    {% endif %}
+                                </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <h2>Nėra jokių straipsnių.</h2>
+                        </div>
+                    {% endif %}
+                </div>
+
         {% endblock %}
         </div>
     </div>

@@ -1,0 +1,24 @@
+{% block category_menu %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('home') }}">Visos kategorijos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            {% if categories %}
+            {% for category in categories %}
+                <a class="nav-item nav-link" href="{{ path('category_posts',{'category_name': category.name, 'id': category.id}) }}">{{ category.name }}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</nav>
+    <h1 class="my-4">Naujienos<small style="color:lightgray; font-size: 18px">
+            {% if app.request.attributes.get('_route') == 'home' %}
+            /visos kategorijos
+                {% else %}
+                /{{ current_category.name }}
+           {% endif %}
+        </small></h1>
+{% endblock %}

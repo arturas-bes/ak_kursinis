@@ -111,7 +111,6 @@ class FrontController extends AbstractController
             $user->getRoles()
         );
         $this->get('security.token_storage')->setToken($token);
-//        if token exists in the session it means that user is logged in in to the application
         $this->get('session')->set('_security_main', serialize($token));
     }
 
@@ -126,6 +125,34 @@ class FrontController extends AbstractController
 
         return $this->render('front/single_post.html.twig',[
             'post' => $singlePost
+        ]);
+    }
+
+    /**
+     * @Route("/{category_name}/{id}", name="category_posts")
+     * @param $category_name
+     * @return Response
+     */
+    public function getPostsbyCategory($category_name, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository(Category::class)->findAll();
+        $currentCategory =  $em->getRepository(Category::class)->find($id);
+        $blogPosts =  $em->getRepository(BlogPost::class)->findBy(['category' => $currentCategory ]);
+
+        return $this->render('front/filtered_posts.html.twig',[
+            'categories' => $categories,
+            'blog_posts' => $blogPosts,
+            'current_category' => $currentCategory,
+        ]);
+    }
+    /**
+     * @Route("/about", name="about_admin")
+     */
+    public function aboutAdminPage()
+    {
+        return $this->render('front/about_admin.html.twig',[
+
         ]);
     }
 }
