@@ -6,7 +6,6 @@ use App\Entity\BlogPost;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\BlogPostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -115,7 +114,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/{blogPost}", name="single_post")
+     * @Route("/blog/{blogPost}", name="single_post")
      * @param $blogPost
      * @return Response
      */
@@ -129,7 +128,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/{category_name}/{id}", name="category_posts")
+     * @Route("/categories/{category_name}/{id}", name="category_posts")
      * @param $category_name
      * @return Response
      */
