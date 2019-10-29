@@ -93,7 +93,6 @@ class CategoryController extends AbstractController
     {
 
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository(Category::class)->find($id);
         $em->remove($category);
         $em->flush();
         return $this->redirectToRoute('add_category');

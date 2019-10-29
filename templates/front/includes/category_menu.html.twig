@@ -1,4 +1,12 @@
 {% block category_menu %}
+    {% if current_author is defined and current_author.getAuthorDescription %}
+
+        <div  class="col-md-10">
+            <h1>Apie autoriu</h1>
+            <p>{{ current_author.getAuthorDescription }}</p>
+        </div>
+        {% else %}
+    {% endif %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ path('home') }}">Visos kategorijos</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +25,9 @@
     <h1 class="my-4">Naujienos<small style="color:lightgray; font-size: 18px">
             {% if app.request.attributes.get('_route') == 'home' %}
             /visos kategorijos
-                {% else %}
+                {% elseif  app.request.attributes.get('_route') == 'author_posts'%}
+                    {{ current_author.firstName }} {{ current_author.LastName }}
+                    {% else %}
                 /{{ current_category.name }}
            {% endif %}
         </small></h1>

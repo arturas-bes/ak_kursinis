@@ -51,9 +51,14 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BlogPost", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="App\Entity\BlogPost", mappedBy="author", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $blogPosts;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $author_description;
 
     public function __construct()
     {
@@ -201,6 +206,18 @@ class User implements UserInterface
                 $blogPost->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthorDescription(): ?string
+    {
+        return $this->author_description;
+    }
+
+    public function setAuthorDescription(?string $author_description): self
+    {
+        $this->author_description = $author_description;
 
         return $this;
     }

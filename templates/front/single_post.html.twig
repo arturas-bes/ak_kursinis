@@ -15,7 +15,7 @@
 
                     </div>
                     <div class="card-footer text-muted">
-                        <small>paskelbta  {{ post.createdAt|date('Y-m-d') }}</small>  autorius  <a href="#">{{ post.author.firstName }} {{ post.author.lastName }}</a>
+                        <small>paskelbta  {{ post.createdAt|date('Y-m-d') }}</small>  autorius  <a href="{{ path('author_posts',{'id':post.author.id}) }}">{{ post.author.firstName }} {{ post.author.lastName }}</a>
                     </div>
                     <a  href="{{ path("home") }}" class="btn btn-outline-secondary m-3">Atgal</a>
                 </div>

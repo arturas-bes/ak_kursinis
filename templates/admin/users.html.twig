@@ -1,0 +1,56 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <h1 class="m-4">Vartotojai</h1>
+    </div>
+
+
+        {% if users %}
+                  <div style="margin: 0 auto" class="col col-md-10">
+            <div class="row">
+            <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Vardas</th>
+                <th scope="col">Pavarde</th>
+                <th scope="col">El pastas</th>
+                <th scope="col">Istrinti vartotoja</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td><a href="{{ path("delete_user", {'id': user.id}) }}">Ištrinti</a> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <h2>Nėra jokių vartotoju.</h2>
+    {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script src="//cdn.ckeditor.com/4.4.7/standard-all/ckeditor.js"></script>
+    <script src="http://cdn.ckeditor.com/4.4.7/standard-all/adapters/jquery.js"></script>
+    <script>
+        $('.custom-file-input').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
+{% endblock %}

@@ -23,7 +23,7 @@
                     </div>
                     <a  href="{{ path('single_post',{'blogPost': post.id}) }}" class="btn btn-outline-secondary m-3">I straipsnį</a>
                     <div class="card-footer text-muted">
-                        <small>paskelbta  {{ post.createdAt|date('Y-m-d') }}</small>  autorius  <a href="#">{{ post.author.firstName }} {{ post.author.lastName }}</a>
+                        <small>paskelbta  {{ post.createdAt|date('Y-m-d') }}</small>  autorius  <a href="{{ path('author_posts',{'id':post.author.id}) }}">{{ post.author.firstName }} {{ post.author.lastName }}</a>
                     </div>
                 </div>
 
