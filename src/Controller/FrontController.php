@@ -87,7 +87,6 @@ class FrontController extends AbstractController
             'categories' => $categories,
             'blog_posts' => $blogPosts,
             'current_author' => $currentAuthor,
-            'blog_posts_trim' => $blogPosts->getSubject(),
         ]);
     }
 }

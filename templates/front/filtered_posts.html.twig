@@ -18,7 +18,8 @@
                     <div class="card-body">
 
                         <p class="card-text">
-                            {{ post.subject|length > 140 ? post.subject|slice(0, 240) ~ '...' : post.subject }}
+                            {{ post.subject|hacksaw(hack='characters', limit='200') }}
+
                         </p>
                     </div>
                     <a  href="{{ path('single_post',{'blogPost': post.id}) }}" class="btn btn-outline-secondary m-3">I straipsnį</a>
